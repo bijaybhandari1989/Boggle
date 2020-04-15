@@ -8,6 +8,8 @@
 
 \$ `bundle install`
 
-\$ `rails generate rspec:install`
-
 \$ `rails db:migrate`
+
+\$ `rails db:migrate RAILS_ENV=test`
+
+\$ `bundle exec rspec`
