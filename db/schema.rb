@@ -21,11 +21,12 @@ ActiveRecord::Schema.define(version: 2020_04_13_131502) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
+    t.integer "high_score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "high_score"
   end
 
   create_table "words", force: :cascade do |t|

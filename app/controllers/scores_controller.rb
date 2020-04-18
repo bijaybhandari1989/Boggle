@@ -1,33 +1,31 @@
 class ScoresController < ApplicationController
-  before_action :set_user
-  before_action :set_user_score, only: [:show, :update, :destroy]
-
-  # GET /users/:user_id/scores
+  
+  # GET /scores
   def index
-    json_response(@user.scores)
+    @scores = current_user.scores
+    json_response(@scores)
   end
 
-  # GET /users/:user_id/scores/:id
+  # GET /scores/:id
   def show
     json_response(@score)
   end
 
-  # POST /users/:user_id/scores
+  # POST /scores
   def create
-    @score = @user.scores.create!(score_params)
-    json_response(@score, :created)
-  end
-
-  # PUT /users/:user_id/scores/:id
-  def update
-    @score.update(score_params)
-    head :no_content
-  end
-
-  # DELETE /users/:user_id/scores/:id
-  def destroy
-    @score.destroy
-    head :no_content
+    text = Message.score_user % score_params[:score]
+    @score = current_user.scores.create!(score_params)
+    if score_params[:score] != 0 and current_user.high_score != 0
+      text = Message.encourage_user % current_user.high_score
+    end
+    if current_user.high_score < score_params[:score]
+        @user = User.find(current_user.id)
+        @user.high_score = score_params[:score]
+        @user.save!
+        text = Message.new_high_score % score_params[:score]
+    end
+    response = {message: text, score: @score}
+    json_response(response, :created)
   end
 
   private
@@ -36,11 +34,4 @@ class ScoresController < ApplicationController
     params.permit(:score)
   end
 
-  def set_user
-    @user = User.find(params[:user_id])
-  end
-
-  def set_user_score
-    @score = @user.scores.find_by!(id: params[:id]) if @user
-  end
 end
