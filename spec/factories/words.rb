@@ -1,5 +1,5 @@
 FactoryBot.define do
     factory :word do
-      name { 'asdhfghhtwv' }
+      name { 'hero' }
     end
   end

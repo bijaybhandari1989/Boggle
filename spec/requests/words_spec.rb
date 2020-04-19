@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Words API', type: :request do
   # initialize user data 
   let!(:user) { create(:user) }
+  let!(:words) { create_list(:word,1) }
   # authorize request
   let(:headers) { valid_headers }
 
@@ -13,8 +14,12 @@ RSpec.describe 'Words API', type: :request do
       { word: 'hero' }.to_json
     end
     context 'when valid request' do
-      before { post '/validate', params: valid_attributes.to_json, headers: headers }
+      before { post '/validate', params: valid_attributes, headers: headers }
 
+      it 'returns valid message' do
+        expect(json['message'])
+          .to match(/Valid Word/)
+      end
       
      end
 

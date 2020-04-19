@@ -14,6 +14,8 @@
 
 \$ `rails db:migrate RAILS_ENV=test`
 
+\$ `rails db:seed` (approx: 1 min)
+
 \$ `bundle exec rspec`
 
 \$ `rails s`
