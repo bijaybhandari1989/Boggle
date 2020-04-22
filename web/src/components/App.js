@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="container-fluid">
+    <>
       <Switch>
         <PrivateRoute exact path="/" component={HomePage} />
         <LoginRoute path="/signup" component={RegisterPage} />
@@ -19,7 +19,7 @@ function App() {
         <Route component={PageNotFound} />
       </Switch>
       <ToastContainer autoClose={3000} hideProgressBar />
-    </div>
+    </>
   );
 }
 

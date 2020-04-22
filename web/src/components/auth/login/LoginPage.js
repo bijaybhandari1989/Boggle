@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { login, logout } from "../../../redux/actions/authActions";
@@ -50,46 +51,52 @@ function LoginPage({ history, login, logout }) {
   }
 
   return (
-    <div className="login-form">
-      <form onSubmit={handleLogin}>
-        <h2 className="text-center"> Login Form</h2>
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Username"
-            name="username"
-            value={username}
-            onChange={handleChange}
-          />
-          {errors.username && (
-            <div className="alert alert-danger">{errors.username}</div>
-          )}
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Password"
-            value={password}
-            onChange={handleChange}
-            name="password"
-          />
-          {errors.password && (
-            <div className="alert alert-danger">{errors.password}</div>
-          )}
-        </div>
-        <div className="form-group">
-          <button
-            type="submit"
-            disabled={saving}
-            className="btn btn-primary btn-block"
-          >
-            {saving ? "Login..." : "Log in"}
-          </button>
-        </div>
-      </form>
-    </div>
+    <form className="form-signin" onSubmit={handleLogin}>
+      <div className="text-center mb-4">
+        <h1 className="h3 mb-3 font-weight-normal">Login</h1>
+      </div>
+
+      <div className="form-label-group">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Username"
+          name="username"
+          value={username}
+          onChange={handleChange}
+        />
+        <label htmlFor="inputEmail">Username</label>
+        {errors.username && (
+          <div className="alert alert-danger">{errors.username}</div>
+        )}
+      </div>
+
+      <div className="form-label-group">
+        <input
+          type="password"
+          className="form-control"
+          placeholder="Password"
+          value={password}
+          onChange={handleChange}
+          name="password"
+        />
+        <label htmlFor="inputPassword">Password</label>
+        {errors.password && (
+          <div className="alert alert-danger">{errors.password}</div>
+        )}
+      </div>
+
+      <button
+        disabled={saving}
+        className="btn btn-lg btn-primary btn-block"
+        type="submit"
+      >
+        {saving ? "Login..." : "Log in"}
+      </button>
+      <p className="mt-4 mb-2 text-muted text-center">
+        Dont have an account? <Link to="/signup">Register</Link>
+      </p>
+    </form>
   );
 }
 
