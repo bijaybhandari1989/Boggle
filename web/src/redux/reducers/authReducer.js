@@ -9,9 +9,15 @@ export default function authenticationReducer(
     case types.LOGIN_SUCCESS:
       return action.auth;
     case types.LOGIN_FAILURE:
-      return {};
+      return {
+        auth_token: "",
+      };
     case types.LOGOUT:
-      return {};
+      return {
+        auth_token: "",
+      };
+    case types.AUTH_USER:
+      return state;
     default:
       return state;
   }

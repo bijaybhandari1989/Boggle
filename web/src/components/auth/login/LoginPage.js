@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { login } from "../../../redux/actions/authActions";
+import { login, logout } from "../../../redux/actions/authActions";
 import { toast } from "react-toastify";
 
-function LoginPage({ history, login, ...props }) {
+function LoginPage({ history, login, logout }) {
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -13,6 +12,11 @@ function LoginPage({ history, login, ...props }) {
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
   const { username, password } = inputs;
+
+  // reset login status
+  useEffect(() => {
+    logout();
+  }, []);
 
   function handleLogin(event) {
     event.preventDefault();
@@ -92,14 +96,16 @@ function LoginPage({ history, login, ...props }) {
 LoginPage.propTypes = {
   history: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps() {
   return {};
 }
 
 const mapDispatchToProps = {
   login,
+  logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

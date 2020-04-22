@@ -5,6 +5,9 @@ import axios from "./axios";
 export function loginSuccess(auth) {
   return { type: types.LOGIN_SUCCESS, auth };
 }
+export function logoutSuccess() {
+  return { type: types.LOGOUT };
+}
 
 export function login(username, password) {
   return async function (dispatch) {
@@ -14,25 +17,33 @@ export function login(username, password) {
         username: username,
         password: password,
       });
+      localStorage.setItem("currentUser", JSON.stringify(auth.data));
       dispatch(loginSuccess(auth.data));
     } catch (error) {
+      localStorage.removeItem("currentUser");
       dispatch(apiCallError(error));
       throw error.response.data;
     }
   };
 }
 
+export function logout() {
+  return async function (dispatch) {
+    dispatch(logoutSuccess());
+  };
+}
+
 export function register(user) {
-  return function (dispatch, getState) {
+  return async function (dispatch) {
     dispatch(beginApiCall());
-    // return courseApi
-    //   .saveCourse(course)
-    //   .then((user) => {
-    //     dispatch(loginSuccess(user));
-    //   })
-    //   .catch((error) => {
-    //     dispatch(apiCallError(error));
-    //     throw error;
-    //   });
+    try {
+      const auth = await axios.post("signup", user);
+      localStorage.setItem("currentUser", JSON.stringify(auth.data));
+      dispatch(loginSuccess(auth.data));
+    } catch (error) {
+      localStorage.removeItem("currentUser");
+      dispatch(apiCallError(error));
+      throw error.response.data;
+    }
   };
 }

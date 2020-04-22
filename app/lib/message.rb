@@ -54,4 +54,8 @@ class Message
   def self.empty_word
     'Word is empty'
   end
+
+  def self.dublicate_user
+    'Dublicate Username'
+  end
 end

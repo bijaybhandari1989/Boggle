@@ -25,6 +25,21 @@ RSpec.describe 'User API', type: :request do
        end
      end
 
+    #  context 'when dublicate request' do
+    #   let(:dublicate_attributes) { { username: "tester@tes.com", name:"test", password:"Test" }.to_json }
+
+    #   before { post '/signup', params: dublicate_attributes, headers: headers }
+
+    #   it 'does not create a new user' do
+    #     expect(response).to have_http_status(400)
+    #   end
+
+    #   it 'returns failure message' do
+    #     expect(json['message'])
+    #       .to match(/Validation failed: Dublicate Username/)
+    #   end
+    # end
+
       context 'when invalid request' do
         before { post '/signup', params: {}, headers: headers }
 
