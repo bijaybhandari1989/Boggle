@@ -18,6 +18,8 @@ gem 'bcrypt', '~> 3.1.7'
 # User JWT for authentication
 gem 'jwt'
 
+gem 'lodash-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

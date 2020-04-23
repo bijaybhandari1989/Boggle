@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useTimer } from "react-timer-hook";
+import { getBoggleBoard } from "../../helper/boggle";
+import GameBoard from "./GameBoard";
 import {
   validate,
   replayGame,
   submitScore,
+  generateWords,
 } from "../../redux/actions/wordActions";
 
 function GamePage({
@@ -14,6 +17,7 @@ function GamePage({
   validate,
   replayGame,
   submitScore,
+  generateWords,
   words,
 }) {
   const [inputs, setInputs] = useState({
@@ -21,6 +25,7 @@ function GamePage({
   });
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
+  const [gameBoard, setGameBoard] = useState([]);
   const [finalMessage, setfinalMessage] = useState("");
   const { seconds, minutes, restart } = useTimer({
     expiryTimestamp,
@@ -38,7 +43,7 @@ function GamePage({
   const { word } = inputs;
   // reset login status
   useEffect(() => {
-    startGame();
+    replay();
   }, []);
 
   function startGame() {
@@ -63,6 +68,10 @@ function GamePage({
       });
   }
 
+  function handleDiceClick(dice) {
+    console.log(dice);
+  }
+
   function handleChange(e) {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
@@ -77,7 +86,11 @@ function GamePage({
     setfinalMessage("");
     inputs.word = "";
     replayGame().then(() => {
-      startGame();
+      generateWords().then((data) => {
+        const board = getBoggleBoard(data);
+        setGameBoard(board);
+        startGame();
+      });
     });
   }
 
@@ -90,7 +103,6 @@ function GamePage({
     } else if (word.length < 3) {
       errors.word = "Word must be at least 3 character.";
     }
-
     setErrors(errors);
     // Form is valid if the errors object still has no properties
     return Object.keys(errors).length === 0;
@@ -110,28 +122,36 @@ function GamePage({
             </div>
           </div>
         ) : (
-          <form className="form" onSubmit={handleWord}>
-            <div className="form-group col-md-6">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Words"
-                name="word"
-                value={word}
-                onChange={handleChange}
-              ></input>
-              {errors.word && (
-                <div className="alert alert-danger">{errors.word}</div>
-              )}
-            </div>
-            <button
-              disabled={saving}
-              className="btn btn-lg btn-primary btn-block col-md-6"
-              type="submit"
-            >
-              {saving ? "Time Out" : "Submit"}
-            </button>
-          </form>
+          <>
+            <form className="form" onSubmit={handleWord}>
+              <GameBoard
+                boards={gameBoard}
+                validateOnClick={handleDiceClick}
+              ></GameBoard>
+              <div className="row">
+                <div className="form-group col-md-6">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Words"
+                    name="word"
+                    value={word}
+                    onChange={handleChange}
+                  ></input>
+                  {errors.word && (
+                    <div className="alert alert-danger">{errors.word}</div>
+                  )}
+                </div>
+                <button
+                  disabled={saving}
+                  className="btn btn-lg btn-primary btn-block col-md-6"
+                  type="submit"
+                >
+                  {saving ? "Time Out" : "Submit"}
+                </button>
+              </div>
+            </form>
+          </>
         )}
       </div>
       <div className="col-md-4">
@@ -179,6 +199,7 @@ GamePage.propTypes = {
   words: PropTypes.array.isRequired,
   replayGame: PropTypes.func.isRequired,
   submitScore: PropTypes.func.isRequired,
+  generateWords: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -191,6 +212,7 @@ const mapDispatchToProps = {
   validate,
   replayGame,
   submitScore,
+  generateWords,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);

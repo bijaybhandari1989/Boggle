@@ -54,6 +54,19 @@ export function submitScore() {
   };
 }
 
+export function generateWords() {
+  return async function (dispatch) {
+    dispatch(beginApiCall());
+    try {
+      const response = await axios.get("generate");
+      return response.data;
+    } catch (error) {
+      dispatch(apiCallError(error));
+      throw error.response.data;
+    }
+  };
+}
+
 export function replayGame() {
   return async function (dispatch) {
     dispatch(restartGame());
