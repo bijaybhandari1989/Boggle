@@ -16,7 +16,7 @@ class ScoresController < ApplicationController
     text = Message.score_user % score_params[:score]
     @score = current_user.scores.create!(score_params)
     if score_params[:score] != 0 and current_user.high_score != 0
-      text = Message.encourage_user % current_user.high_score
+      text = Message.encourage_user % score_params[:score]
     end
     if current_user.high_score < score_params[:score]
         @user = User.find(current_user.id)

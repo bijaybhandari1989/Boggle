@@ -6,6 +6,7 @@ export const AUTH_USER = "AUTH_USER";
 export const LOGOUT = "USERS_LOGOUT";
 
 export const WORD_SUCCESS = "WORD_SUCCESS";
+export const GAME_RESTART = "GAME_RESTART";
 
 export const REGISTER_SUCCESS = "USERS_REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "USERS_REGISTER_FAILURE";

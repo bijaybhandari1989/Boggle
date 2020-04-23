@@ -36,7 +36,7 @@ class Message
   end
 
   def self.encourage_user
-    'Try little harder!! Your High Score: %s'
+    'Try little harder!! Your Score: %s'
   end
 
   def self.score_user
