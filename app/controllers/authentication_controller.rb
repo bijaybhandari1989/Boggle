@@ -3,7 +3,8 @@ class AuthenticationController < ApplicationController
   # return auth token once user is authenticated
   def authenticate
     auth_token = AuthenticateUser.new(auth_params[:username], auth_params[:password]).call
-    json_response(auth_token: auth_token)
+    user = User.find_by(username: auth_params[:username])
+    json_response(auth_token: auth_token, high_score: user.high_score )
   end
 
   private

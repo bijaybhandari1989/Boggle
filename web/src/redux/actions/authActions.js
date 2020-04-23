@@ -29,6 +29,10 @@ export function login(username, password) {
 
 export function logout() {
   return async function (dispatch) {
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify({ auth_token: "", high_score: 0 })
+    );
     dispatch(logoutSuccess());
   };
 }

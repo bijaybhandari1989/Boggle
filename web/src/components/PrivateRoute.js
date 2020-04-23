@@ -24,7 +24,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 PrivateRoute.propTypes = {
   component: PropTypes.elementType.isRequired,
-  location: PropTypes.string,
+  location: PropTypes.object,
 };
 
 export default PrivateRoute;

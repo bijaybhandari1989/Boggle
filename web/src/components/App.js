@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home/HomePage";
+import GamePage from "./game/GamePage";
 import LoginPage from "./auth/login/LoginPage";
 import RegisterPage from "./auth/register/RegisterPage";
 import PrivateRoute from "./PrivateRoute";
@@ -14,6 +15,7 @@ function App() {
     <>
       <Switch>
         <PrivateRoute exact path="/" component={HomePage} />
+        <PrivateRoute path="/game" component={GamePage} />
         <LoginRoute path="/signup" component={RegisterPage} />
         <LoginRoute path="/login" component={LoginPage} />
         <Route component={PageNotFound} />

@@ -5,6 +5,8 @@ export default {
     ? auth
     : {
         auth_token: "",
+        high_score: 0,
       },
   apiCallsInProgress: 0,
+  words: [],
 };
