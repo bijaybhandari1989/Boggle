@@ -4,11 +4,12 @@
 
 # Getting Started
 
-- Clone the repository using the command `git clone git@github.com:bijaybhandari1989/Boggle.git` and checkout the master branch.
+- Clone the repository using the command
+- `git clone git@github.com:bijaybhandari1989/Boggle.git` and checkout the master branch.
 
 # Command Line
 
-- To Run API
+### To Run API
 
 \$ `bundle install`
 
@@ -22,7 +23,7 @@
 
 \$ `rails s` (run on port: 3000 (http://localhost:3000))
 
-- To Run Client App
+### To Run Client App
 
 \$ `cd web/`
 
