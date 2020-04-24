@@ -8,6 +8,8 @@
 
 # Command Line
 
+- To Run API
+
 \$ `bundle install`
 
 \$ `rails db:migrate`
@@ -18,4 +20,12 @@
 
 \$ `bundle exec rspec`
 
-\$ `rails s`
+\$ `rails s` (run on port: 3000 (http://localhost:3000))
+
+- To Run Client App
+
+\$ `cd web/`
+
+\$ `npm install`
+
+\$ `npm start` (run on port: 4000 (http://localhost:4000))
