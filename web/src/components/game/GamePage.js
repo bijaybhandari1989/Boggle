@@ -190,10 +190,7 @@ function GamePage({
           <div className="row">
             <div className="col-md-6 text-left">
               <h3>How to Play?</h3>
-              <p>
-                You can click on the gameboard or directly enter the word on the
-                textbox.
-              </p>
+              <p>You can click on the gameboard to start writing words.</p>
               <h3>Instructions</h3>
               <ol>
                 <li>
@@ -229,9 +226,10 @@ function GamePage({
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter Words"
+                    placeholder="Click Letters Above"
                     name="word"
                     value={word}
+                    readOnly
                     onChange={handleChange}
                   ></input>
                   {errors.word && (
