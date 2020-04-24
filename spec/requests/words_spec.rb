@@ -20,7 +20,11 @@ RSpec.describe 'Words API', type: :request do
         expect(json['message'])
           .to match(/Valid Word/)
       end
-      
+
+      it 'returns score valid' do
+        expect(json['score'])
+          .to match(1)
+      end      
      end
 
       context 'when empty request' do

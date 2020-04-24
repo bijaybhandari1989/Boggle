@@ -8,7 +8,7 @@ function GameBoard({ boards, validateOnClick }) {
         return (
           <button
             type="button"
-            className="boogle-box"
+            className={dice.isActive ? "boogle-box selected" : "boogle-box"}
             key={index}
             onClick={() => validateOnClick(dice)}
           >
