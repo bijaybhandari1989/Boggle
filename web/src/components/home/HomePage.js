@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { replayGame } from "../../redux/actions/wordActions";
 
-function HomePage({ replayGame }) {
+export function HomePage({ replayGame }) {
   // reset game
   useEffect(() => {
     replayGame();

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../../main.css";
 const MainLayout = (props) => {
   return (
@@ -9,12 +9,12 @@ const MainLayout = (props) => {
         <div className="inner">
           <h3 className="masthead-brand">Boggle</h3>
           <nav className="nav nav-masthead justify-content-center">
-            <Link to="/" className="nav-link active">
+            <NavLink to="/" className="nav-link active" exact>
               Home
-            </Link>
-            <Link to="/login" className="nav-link">
+            </NavLink>
+            <NavLink to="/login" className="nav-link">
               Logout
-            </Link>
+            </NavLink>
           </nav>
         </div>
       </header>
