@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function GamePageComplete({ minutes, seconds, words, calculateTotalScore }) {
+function GamePageScore({ minutes, seconds, words, calculateTotalScore }) {
   return (
     <table className="table table-dark">
       <thead>
@@ -40,11 +40,11 @@ function GamePageComplete({ minutes, seconds, words, calculateTotalScore }) {
   );
 }
 
-GamePageComplete.propTypes = {
+GamePageScore.propTypes = {
   minutes: PropTypes.number.isRequired,
   seconds: PropTypes.number.isRequired,
   words: PropTypes.array.isRequired,
   calculateTotalScore: PropTypes.func.isRequired,
 };
 
-export default GamePageComplete;
+export default GamePageScore;

@@ -7,7 +7,7 @@ function renderGamePage(args) {
   const defaultProps = {
     expiryTimestamp: {},
     validate: jest.fn(),
-    replayGame: async () => {},
+    replayGame: jest.fn(() => Promise.resolve({ data: {} })),
     submitScore: jest.fn(),
     generateWords: jest.fn(),
     words: [],

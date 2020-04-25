@@ -19,7 +19,6 @@ import GamePageComplete from "./GamePageComplete";
 import GamePageScore from "./GamePageScore";
 
 export function GamePage({
-  expiryTimestamp,
   validate,
   replayGame,
   submitScore,
@@ -35,7 +34,7 @@ export function GamePage({
   const [diceList, setDiceList] = useState([]);
   const [finalMessage, setfinalMessage] = useState("");
   const { seconds, minutes, restart } = useTimer({
-    expiryTimestamp,
+    expiryTimestamp: new Date(),
     onExpire: () => {
       setSaving(true);
       submitScore(0)
@@ -208,7 +207,6 @@ export function GamePage({
 }
 
 GamePage.propTypes = {
-  expiryTimestamp: PropTypes.object,
   validate: PropTypes.func.isRequired,
   words: PropTypes.array.isRequired,
   replayGame: PropTypes.func.isRequired,

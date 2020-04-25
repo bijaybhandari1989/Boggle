@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import { beginApiCall, apiCallError } from "./apiStatusActions";
-import axios from "./axios";
+import * as wordApi from "../../api/wordApi";
 
 export function validateSuccess(word) {
   const wordscore = {
@@ -18,19 +18,19 @@ export function validate(word) {
   return async function (dispatch) {
     dispatch(beginApiCall());
     try {
-      const response = await axios.post("validate", {
+      const response = await wordApi.validate({
         word: word,
       });
-      if (response.data.valid) {
-        dispatch(validateSuccess(response.data));
+      if (response.valid) {
+        dispatch(validateSuccess(response));
       } else {
-        let message = response.data.message;
+        let message = response.message;
         dispatch(apiCallError(message));
-        return response.data;
+        return response;
       }
     } catch (error) {
       dispatch(apiCallError(error));
-      throw error.response.data;
+      throw error;
     }
   };
 }
@@ -43,13 +43,13 @@ export function submitScore() {
         (total, obj) => obj.score + total,
         0
       );
-      const response = await axios.post("scores", {
+      const response = await wordApi.scores({
         score: score,
       });
-      return { message: response.data.message, score };
+      return { message: response.message, score };
     } catch (error) {
       dispatch(apiCallError(error));
-      throw error.response.data;
+      throw error;
     }
   };
 }
@@ -58,11 +58,11 @@ export function generateWords() {
   return async function (dispatch) {
     dispatch(beginApiCall());
     try {
-      const response = await axios.get("generate");
-      return response.data;
+      const response = await wordApi.generateWords();
+      return response;
     } catch (error) {
       dispatch(apiCallError(error));
-      throw error.response.data;
+      throw error;
     }
   };
 }
