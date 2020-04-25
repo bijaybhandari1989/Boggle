@@ -2,7 +2,17 @@
   "name": "boggle_web_app",
   "description": "Boggle Web App",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.dev.js --port 4000"
+    "start": "webpack-dev-server --config webpack.config.dev.js --port 4000",
+    "test": "jest --watchAll"
+  },
+  "jest": {
+    "setupFiles": [
+      "./tools/testSetup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tools/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/tools/styleMock.js"
+    }
   },
   "dependencies": {
     "axios": "^0.19.2",

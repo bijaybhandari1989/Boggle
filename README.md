@@ -21,7 +21,7 @@
 
 \$ `rails db:seed` (approx: 1 min)
 
-\$ `bundle exec rspec`
+\$ `bundle exec rspec` (To run tests)
 
 \$ `rails s` (run on port: 3000 (http://localhost:3000))
 
@@ -32,5 +32,7 @@
 \$ `cd web/`
 
 \$ `npm install`
+
+\$ `npm t` (To run tests)
 
 \$ `npm start` (run on port: 4000 (http://localhost:4000))
