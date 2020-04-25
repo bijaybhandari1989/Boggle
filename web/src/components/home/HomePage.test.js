@@ -22,3 +22,9 @@ it("contains 1 Link", () => {
   const link = wrapper.find("Link").length;
   expect(link).toEqual(1);
 });
+
+it("contains game route in Link", () => {
+  const wrapper = renderHomePage();
+  const link = wrapper.find("Link").prop("to");
+  expect(link).toEqual("/game");
+});

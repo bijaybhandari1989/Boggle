@@ -8,15 +8,17 @@ import {
   selectBoardDice,
   deselectBoardDice,
 } from "../../helper/boggle";
-import GameBoard from "./GameBoard";
+import GameBoardMain from "./GameBoardMain";
 import {
   validate,
   replayGame,
   submitScore,
   generateWords,
 } from "../../redux/actions/wordActions";
+import GamePageComplete from "./GamePageComplete";
+import GamePageScore from "./GamePageScore";
 
-function GamePage({
+export function GamePage({
   expiryTimestamp,
   validate,
   replayGame,
@@ -45,7 +47,6 @@ function GamePage({
         });
     },
   });
-  const { word } = inputs;
   // reset login status
   useEffect(() => {
     replay();
@@ -177,123 +178,30 @@ function GamePage({
     <div className="row">
       <div className="col-md-8">
         {finalMessage.length > 0 ? (
-          <div className="row text-left">
-            <div className="col-md-12">
-              <h3>Game Results!!</h3>
-              <p>{finalMessage}</p>
-              <button className="btn btn-lg btn-primary" onClick={replay}>
-                Replay >>
-              </button>
-            </div>
-          </div>
+          <GamePageComplete
+            message={finalMessage}
+            onReplay={replay}
+          ></GamePageComplete>
         ) : (
-          <div className="row">
-            <div className="col-md-6 text-left">
-              <h3>How to Play?</h3>
-              <p>You can click on the gameboard to start writing words.</p>
-              <h3>Instructions</h3>
-              <ol>
-                <li>
-                  The letters must be adjoining in a 'chain'. (Letter cubes in
-                  the chain may be adjacent horizontally, vertically, or
-                  diagonally.)
-                </li>
-                <li>Words must contain at least three letters.</li>
-                <li>
-                  No letter cube may be used more than once within a single
-                  word.
-                </li>
-                <li>Words cannot be repeated.</li>
-              </ol>
-              <h3>Scoring</h3>
-              <ul>
-                <li>Fewer than 3 Letters: no score</li>
-                <li>3 Letters: 1 point</li>
-                <li>4 Letters: 1 point</li>
-                <li>5 Letters: 2 points</li>
-                <li>6 Letters: 3 points</li>
-                <li>7 Letters: 4 points</li>
-                <li>8 or More Letters: 11 points</li>
-              </ul>
-            </div>
-            <div className="col-md-6">
-              <GameBoard
-                boards={gameBoard}
-                validateOnClick={handleDiceClick}
-              ></GameBoard>
-              <form className="form mt-5" onSubmit={handleWord}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Click Letters Above"
-                    name="word"
-                    value={word}
-                    readOnly
-                    onChange={handleChange}
-                  ></input>
-                  {errors.word && (
-                    <div className="alert alert-danger">{errors.word}</div>
-                  )}
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <button
-                      className="btn btn-lg btn-danger btn-block"
-                      onClick={() => reset(event)}
-                    >
-                      Reset
-                    </button>
-                  </div>
-                  <div className="col-md-6">
-                    <button
-                      disabled={saving}
-                      className="btn btn-lg btn-primary btn-block"
-                      type="submit"
-                    >
-                      {saving ? "Time Out" : "Submit"}
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+          <GameBoardMain
+            errors={errors}
+            gameBoard={gameBoard}
+            onChange={handleChange}
+            onDiceClick={handleDiceClick}
+            onReset={reset}
+            onSubmit={handleWord}
+            saving={saving}
+            formdata={inputs}
+          ></GameBoardMain>
         )}
       </div>
       <div className="col-md-4">
-        <table className="table table-dark">
-          <thead>
-            <tr>
-              <th colSpan="2">Timer</th>
-            </tr>
-            <tr>
-              <th colSpan="2">
-                <span>{("0" + minutes).slice(-2)}</span>:
-                <span>{("0" + seconds).slice(-2)}</span>
-              </th>
-            </tr>
-            <tr>
-              <th>Word</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {words.map((word) => {
-              return (
-                <tr key={word.word}>
-                  <td>{word.word}</td>
-                  <td>{word.score}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>Total</td>
-              <td>{calculateTotalScore(words)}</td>
-            </tr>
-          </tfoot>
-        </table>
+        <GamePageScore
+          calculateTotalScore={calculateTotalScore}
+          seconds={seconds}
+          minutes={minutes}
+          words={words}
+        ></GamePageScore>
       </div>
     </div>
   );
