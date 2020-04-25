@@ -8,16 +8,10 @@ export default function authenticationReducer(
   switch (action.type) {
     case types.LOGIN_SUCCESS:
       return action.auth;
-    case types.LOGIN_FAILURE:
-      return {
-        auth_token: "",
-      };
     case types.LOGOUT:
       return {
         auth_token: "",
       };
-    case types.AUTH_USER:
-      return state;
     default:
       return state;
   }

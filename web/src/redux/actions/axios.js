@@ -10,7 +10,10 @@ instance.interceptors.request.use(
   tokenProvider({
     getToken: () => {
       let auth = JSON.parse(localStorage.getItem("currentUser"));
-      return auth.auth_token;
+      if (auth && auth.auth_token.length > 0) {
+        return auth.auth_token;
+      }
+      return "";
     },
   })
 );

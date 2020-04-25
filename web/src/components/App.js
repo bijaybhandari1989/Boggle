@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import ConnectedHomePage from "./home/HomePage";
-import GamePage from "./game/GamePage";
+import ConnectedGamePage from "./game/GamePage";
 import ConnectedLoginPage from "./auth/login/LoginPage";
 import ConnectedRegisterPage from "./auth/register/RegisterPage";
 import PrivateRoute from "./PrivateRoute";
@@ -15,7 +15,7 @@ function App() {
     <>
       <Switch>
         <PrivateRoute exact path="/" component={ConnectedHomePage} />
-        <PrivateRoute path="/game" component={GamePage} />
+        <PrivateRoute path="/game" component={ConnectedGamePage} />
         <LoginRoute path="/signup" component={ConnectedRegisterPage} />
         <LoginRoute path="/login" component={ConnectedLoginPage} />
         <Route component={PageNotFound} />

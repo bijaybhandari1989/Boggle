@@ -37,3 +37,6 @@ build
 
 # json-server db
 db.json
+
+#package lock file
+package-lock.json
