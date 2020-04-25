@@ -6,6 +6,8 @@
 
 - Clone the repository using the command
 - `git clone git@github.com:bijaybhandari1989/Boggle.git` and checkout the master branch.
+- **Install ruby v2.6.6 and rails 6.0.1**
+- **Install latest version of Node LTS**
 
 # Command Line
 
@@ -24,6 +26,8 @@
 \$ `rails s` (run on port: 3000 (http://localhost:3000))
 
 ### To Run Client App
+
+- **Navigate to this project's root directory on the command line.**
 
 \$ `cd web/`
 
