@@ -8,6 +8,7 @@
 - `git clone git@github.com:bijaybhandari1989/Boggle.git` and checkout the master branch.
 - **Install ruby v2.6.6 and rails 6.0.1**
 - **Install latest version of Node LTS**
+- **Install latest version of bundler**
 
 # Command Line
 
