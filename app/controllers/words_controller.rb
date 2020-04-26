@@ -18,7 +18,7 @@ class WordsController < ApplicationController
         when 0..2
           score = 0
         when 3..4
-          socre = 1
+          score = 1
         when 5
           score = 2
         when 6
